@@ -18,7 +18,7 @@ const widgets = [
 
 const AppWidget1 = () => {
     return (
-        <Grid container spacing={2} style={{ padding: '10px' }}>
+        <Grid container spacing={2}>
             {widgets.map((widget, index) => (
                 <Grid 
                     item 
@@ -29,7 +29,7 @@ const AppWidget1 = () => {
                     key={index} 
                     style={{ display: 'flex', justifyContent: 'center' }} // Center the grid items
                 >
-                    <Card sx={{ backgroundColor: '#1a202c', color: '#fff', minHeight: '120px', width: '100%' }}>
+                    <Card sx={{ backgroundColor: '#fafbfc', color: '#0d0800', minHeight: '120px', width: '100%' }}>
                         <CardContent>
                             <Typography variant="subtitle1" gutterBottom>
                                 {widget.title}

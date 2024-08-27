@@ -1,4 +1,3 @@
-// src/Sidebar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Collapse, Typography, Divider } from '@mui/material';
@@ -29,12 +28,12 @@ const Sidebar = () => {
         <Drawer
             variant='permanent'
             sx={{
-                width: 240,
+                width: 180,  // Adjusted from 220px to 180px to reduce sidebar width
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: {
-                    width: 240,
+                    width: 220,  // Match drawer paper width with the sidebar width
                     boxSizing: 'border-box',
-                    top: '64px',
+                    top: '60px',
                     backgroundColor: '#f8f9fa',  // Light background
                     color: '#333',  // Dark text
                 }

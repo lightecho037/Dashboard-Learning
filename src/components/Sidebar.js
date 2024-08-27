@@ -1,5 +1,6 @@
 // src/Sidebar.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Collapse, Typography, Divider } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MessageIcon from '@mui/icons-material/Message';
@@ -86,17 +87,27 @@ const Sidebar = () => {
                 </ListItemButton>
                 <Collapse in={openTab === 'applications'} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }} onClick={() => handleSubItemClick('applications')}>
-                            <ListItemIcon sx={{ minWidth: '30px' }}><CircleIcon style={{ transform: 'scale(0.40)'}} /></ListItemIcon>
-                            <ListItemText primary="Application1" />
+                        <ListItemButton 
+                            component={Link}
+                            to='applications/application1'
+                            sx={{ pl: 4 }} 
+                            onClick={() => handleSubItemClick('applications')}>
+                                <ListItemIcon sx={{ minWidth: '30px' }}><CircleIcon style={{ transform: 'scale(0.40)'}} /></ListItemIcon>
+                                <ListItemText primary="Application1" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }} onClick={() => handleSubItemClick('applications')}>
-                            <ListItemIcon sx={{ minWidth: '30px' }}><CircleIcon style={{ transform: 'scale(0.40)'}} /></ListItemIcon>
-                            <ListItemText primary="Application2" />
+                        <ListItemButton
+                            component={Link}
+                            to='applications/application2'
+                            sx={{ pl: 4 }} onClick={() => handleSubItemClick('applications')}>
+                                <ListItemIcon sx={{ minWidth: '30px' }}><CircleIcon style={{ transform: 'scale(0.40)'}} /></ListItemIcon>
+                                <ListItemText primary="Application2" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }} onClick={() => handleSubItemClick('applications')}>
-                            <ListItemIcon sx={{ minWidth: '30px' }}><CircleIcon style={{ transform: 'scale(0.40)'}} /></ListItemIcon>
-                            <ListItemText primary="Application3" />
+                        <ListItemButton 
+                            component={Link}
+                            to='applications/application3'
+                            sx={{ pl: 4 }} onClick={() => handleSubItemClick('applications')}>
+                                <ListItemIcon sx={{ minWidth: '30px' }}><CircleIcon style={{ transform: 'scale(0.40)'}} /></ListItemIcon>
+                                <ListItemText primary="Application3" />
                         </ListItemButton>
                     </List>
                 </Collapse>

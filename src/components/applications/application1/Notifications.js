@@ -4,7 +4,7 @@ import React from 'react';
 const AppView = () => {
     return (
         <div>
-            <h2>Performance</h2>
+            <h2>Notifications</h2>
         </div>
     );
 };

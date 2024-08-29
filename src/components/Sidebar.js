@@ -13,6 +13,7 @@ import StorageIcon from '@mui/icons-material/Storage';
 import MemoryIcon from '@mui/icons-material/Memory';
 import PestControlIcon from '@mui/icons-material/PestControl';
 
+
 const Sidebar = () => {
     const [openTab, setOpenTab] = useState(null); // Manage which main tab is open
 
@@ -41,7 +42,7 @@ const Sidebar = () => {
             <List>
                 {/* Dashboard Item */}
                 <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton component={Link} to='/dashboard'>
                         <ListItemIcon><DashboardIcon style={{ color: '#333' }} /></ListItemIcon>
                         <ListItemText primary='Dashboard' />
                     </ListItemButton>
@@ -49,7 +50,7 @@ const Sidebar = () => {
 
                 {/* Nest AI Item */}
                 <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton component={Link} to='/NestAi'>  {/* Match the route path */}
                         <ListItemIcon><MessageIcon style={{ color: '#333' }} /></ListItemIcon>
                         <ListItemText primary='Nest AI' />
                     </ListItemButton>

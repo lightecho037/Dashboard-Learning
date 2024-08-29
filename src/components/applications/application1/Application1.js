@@ -51,7 +51,7 @@ const Application1 = () => {
 
     return (
         <div>
-            <Grid container spacing={2} alignItems="center" sx={{ padding: 3, paddingX: 0 }} wrap="nowrap">
+            <Grid container spacing={2} alignItems="center" sx={{ padding: 2, paddingX: 0 }} wrap="nowrap">
                 <Grid item xs={12} md={8}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs 
@@ -126,8 +126,8 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                <Box sx={{ p: 1, paddingX: 0 }}>
+                    <Typography component="div" variant="body1">{children}</Typography>
                 </Box>
             )}
         </div>

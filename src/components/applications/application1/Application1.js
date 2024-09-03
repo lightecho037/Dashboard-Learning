@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, Tabs, Tab, Typography } from '@mui/material';
 import { Download as DownloadIcon } from '@mui/icons-material';
-import AppView from './AppView';
+import AppView from './appview/AppView';
 import Performance from './Performance';
 import Errors from './Errors';
 import Transactions from './Transactions';
@@ -51,7 +51,7 @@ const Application1 = () => {
 
     return (
         <div>
-            <Grid container spacing={2} alignItems="center" sx={{ padding: 2, paddingX: 0 }} wrap="nowrap">
+            <Grid container spacing={2} alignItems="center" sx={{ padding: 2, paddingX: 0, paddingTop: 2 }} wrap="nowrap">
                 <Grid item xs={12} md={8}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs 

@@ -1,14 +1,8 @@
-import React from 'react';
-import { Grid, Card, CardContent, Typography, CircularProgress, Box } from '@mui/material';
+import React, { useRef } from 'react';
+import { Grid, Card, CardContent, Box } from '@mui/material';
 import ReactECharts from 'echarts-for-react';
-
-const widgets = [
-    { title: "CPU Usage", value: 50, status: "System is running smoothly", color: '#3f51b5' },
-    { title: "Memory Usage", value: 65, status: "Memory usage is normal", color: '#f50057' },
-    { title: "Disk Usage", value: 40, status: "Disk performance is optimal", color: '#ff9800' },
-    { title: "Network Traffic", value: 80, status: "Network is stable", color: '#4caf50' },
-    { title: "Services", value: 50, status: "Few errors detected", color: '#f44336' },
-];
+import checkAllIcon from './icons/checkAllIcon.svg';
+import uncheckAllIcon from './icons/uncheckAllIcon.svg';
 
 const chartData = [
     { time: '11:00 AM', CPU: 50, Memory: 65, Disk: 40, Network: 80, Services: 50 },
@@ -20,7 +14,9 @@ const chartData = [
     { time: '12:00 PM', CPU: 58, Memory: 65, Disk: 48, Network: 83, Services: 60 },
 ];
 
-const AppWidget1 = () => {
+const SystemResourceChart = () => {
+    const chartRef = useRef(null);
+
     const chartOptions = {
         title: {
             text: 'System Resource Usage Over Time',
@@ -31,8 +27,8 @@ const AppWidget1 = () => {
             },
         },
         tooltip: {
-            trigger: 'item',  // Change trigger to 'item' to only show tooltip for the hovered series
-            formatter: function(params) {
+            trigger: 'item',
+            formatter: function (params) {
                 return `${params.marker} ${params.seriesName}: ${params.value}`;
             },
         },
@@ -56,6 +52,44 @@ const AppWidget1 = () => {
             feature: {
                 saveAsImage: { title: 'Download' },
                 restore: { title: 'Reset' },
+                myCheckAll: {
+                    show: true,
+                    title: 'Check All',
+                    icon: `image://${checkAllIcon}`,
+                    onclick: () => {
+                        const chartInstance = chartRef.current.getEchartsInstance();
+                        chartInstance.setOption({
+                            legend: {
+                                selected: {
+                                    'CPU': true,
+                                    'Memory': true,
+                                    'Disk': true,
+                                    'Network': true,
+                                    'Services': true,
+                                },
+                            },
+                        });
+                    },
+                },
+                myUncheckAll: {
+                    show: true,
+                    title: 'Uncheck All',
+                    icon: `image://${uncheckAllIcon}`,
+                    onclick: () => {
+                        const chartInstance = chartRef.current.getEchartsInstance();
+                        chartInstance.setOption({
+                            legend: {
+                                selected: {
+                                    'CPU': false,
+                                    'Memory': false,
+                                    'Disk': false,
+                                    'Network': false,
+                                    'Services': false,
+                                },
+                            },
+                        });
+                    },
+                },
             },
             right: 10,
             top: 10,
@@ -74,16 +108,17 @@ const AppWidget1 = () => {
                 fontSize: 10,
             },
             boundaryGap: [0, '100%'],
+            max: 100,
         },
         dataZoom: [
             {
                 type: 'inside',
-                start: 0,
-                end: 100,
+                start: 50,
+                end: 30,
             },
             {
-                start: 0,
-                end: 100,
+                start: 50,
+                end: 30,
             },
         ],
         series: [
@@ -162,77 +197,15 @@ const AppWidget1 = () => {
 
     return (
         <Grid container spacing={2}>
-            {widgets.map((widget, index) => (
-                <Grid 
-                    item 
-                    xs={12} 
-                    sm={6} 
-                    md={4} 
-                    lg={2.4} 
-                    key={index} 
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                >
-                    <Card 
-                        sx={{ 
-                            backgroundColor: '#fafbfc', 
-                            color: '#0d0800', 
-                            minHeight: '120px', 
-                            width: '100%', 
-                            borderRadius: '10px', 
-                            boxShadow: '1px 1px 1px rgba(0, 0, 0, 0.1)', 
-                            border: '1px solid #d6d6d6', 
-                            display: 'flex', 
-                            alignItems: 'center' 
-                        }}
-                    >
-                        <CardContent sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                            <Box>
-                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                                    {widget.title}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#4caf50', marginBottom: '8px' }}>
-                                    {widget.status}
-                                </Typography>
-                            </Box>
-                            <Box sx={{ marginLeft: 'auto' }}>
-                                {widget.icon}
-                            </Box>
-                            <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-                                <CircularProgress 
-                                    variant="determinate" 
-                                    value={widget.value} 
-                                    size={80} 
-                                    thickness={4}
-                                    sx={{ color: widget.color }}
-                                />
-                                <Box
-                                    sx={{
-                                        top: 0,
-                                        left: 0,
-                                        bottom: 0,
-                                        right: 0,
-                                        position: 'absolute',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <Typography variant="h5" component="div" color="textSecondary">
-                                        {`${widget.value}%`}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            ))}
-
-            {/* Add the ECharts line chart here */}
             <Grid item xs={12}>
                 <Card sx={{ borderRadius: 2, boxShadow: 3, border: '1px solid #ddd' }}>
                     <CardContent>
                         <Box sx={{ height: 350 }}>
-                            <ReactECharts option={chartOptions} style={{ height: '100%', width: '100%' }} />
+                            <ReactECharts
+                                option={chartOptions}
+                                style={{ height: '100%', width: '100%' }}
+                                ref={chartRef}
+                            />
                         </Box>
                     </CardContent>
                 </Card>
@@ -241,4 +214,4 @@ const AppWidget1 = () => {
     );
 };
 
-export default AppWidget1;
+export default SystemResourceChart;

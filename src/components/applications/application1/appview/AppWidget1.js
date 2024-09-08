@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Card, CardContent, Typography, CircularProgress, Box } from '@mui/material';
+import { Grid, Card, Typography, CircularProgress, Box } from '@mui/material';
 
 const widgets = [
     { title: "CPU Usage", value: 50, status: "System is running smoothly", color: '#3f51b5' },
